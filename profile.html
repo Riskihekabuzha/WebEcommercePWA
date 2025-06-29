@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - ShopMart PWA</title>
+    
+    <!-- Meta tags untuk PWA -->
+    <meta name="description" content="Kelola profil dan pengaturan akun Anda">
+    <meta name="theme-color" content="#4f46e5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <!-- Link ke manifest dan favicon -->
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" href="/placeholder.svg?height=32&width=32">
+    
+    <!-- Link ke CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-shopping-bag"></i>
+                <span>ShopMart</span>
+            </div>
+            
+            <nav class="nav-desktop">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i> Beranda
+                </a>
+                <a href="products.html" class="nav-link">
+                    <i class="fas fa-box"></i> Produk
+                </a>
+                <a href="cart.html" class="nav-link">
+                    <i class="fas fa-shopping-cart"></i> 
+                    Keranjang <span class="cart-count">0</span>
+                </a>
+                <a href="profile.html" class="nav-link active">
+                    <i class="fas fa-user"></i> Profil
+                </a>
+            </nav>
+            
+            <button class="menu-toggle" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Menu mobile -->
+    <nav class="nav-mobile" id="mobileMenu">
+        <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i> Beranda
+        </a>
+        <a href="products.html" class="nav-link">
+            <i class="fas fa-box"></i> Produk
+        </a>
+        <a href="cart.html" class="nav-link">
+            <i class="fas fa-shopping-cart"></i> 
+            Keranjang <span class="cart-count">0</span>
+        </a>
+        <a href="profile.html" class="nav-link active">
+            <i class="fas fa-user"></i> Profil
+        </a>
+    </nav>
+
+    <!-- Konten utama halaman profil -->
+    <main class="main">
+        <!-- Header halaman profil -->
+        <section class="page-header">
+            <div class="container">
+                <h1><i class="fas fa-user"></i> Profil Pengguna</h1>
+                <p>Kelola informasi akun dan pengaturan Anda</p>
+            </div>
+        </section>
+
+        <!-- Konten profil -->
+        <section class="profile-section">
+            <div class="container">
+                <div class="profile-layout">
+                    <!-- Informasi profil -->
+                    <div class="profile-info">
+                        <div class="profile-card">
+                            <div class="profile-avatar">
+                                <img src="/placeholder.svg?height=100&width=100" alt="Avatar" id="profileAvatar">
+                                <button class="avatar-edit" onclick="changeAvatar()">
+                                    <i class="fas fa-camera"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="profile-details">
+                                <h2 id="profileName">John Doe</h2>
+                                <p id="profileEmail">john.doe@email.com</p>
+                                <p class="profile-member">Member sejak: <span id="memberSince">Januari 2024</span></p>
+                            </div>
+                        </div>
+                        
+                        <!-- Form edit profil -->
+                        <div class="profile-form">
+                            <h3>Edit Profil</h3>
+                            <form id="profileForm" onsubmit="updateProfile(event)">
+                                <div class="form-group">
+                                    <label for="fullName">Nama Lengkap:</label>
+                                    <input type="text" id="fullName" name="fullName" value="John Doe" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" id="email" name="email" value="john.doe@email.com" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone">Nomor Telepon:</label>
+                                    <input type="tel" id="phone" name="phone" value="+62 812 3456 7890">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="address">Alamat:</label>
+                                    <textarea id="address" name="address" rows="3">Jl. Contoh No. 123, Jakarta</textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn-primary">
+                                    <i class="fas fa-save"></i> Simpan Perubahan
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Menu pengaturan -->
+                    <div class="profile-settings">
+                        <div class="settings-card">
+                            <h3>Pengaturan</h3>
+                            
+                            <!-- Notifikasi -->
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <i class="fas fa-bell"></i>
+                                    <div>
+                                        <h4>Notifikasi Push</h4>
+                                        <p>Terima notifikasi tentang penawaran dan update</p>
+                                    </div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="notifications" checked onchange="toggleNotifications()">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            
+                            <!-- Dark Mode -->
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <i class="fas fa-moon"></i>
+                                    <div>
+                                        <h4>Mode Gelap</h4>
+                                        <p>Ubah tampilan ke mode gelap</p>
+                                    </div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="darkMode" onchange="toggleDarkMode()">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            
+                            <!-- Offline Mode -->
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <i class="fas fa-wifi"></i>
+                                    <div>
+                                        <h4>Mode Offline</h4>
+                                        <p>Simpan data untuk akses offline</p>
+                                    </div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="offlineMode" checked onchange="toggleOfflineMode()">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Statistik pengguna -->
+                        <div class="stats-card">
+                            <h3>Statistik Belanja</h3>
+                            
+                            <div class="stat-item">
+                                <i class="fas fa-shopping-bag"></i>
+                                <div>
+                                    <span class="stat-number" id="totalOrders">12</span>
+                                    <span class="stat-label">Total Pesanan</span>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-item">
+                                <i class="fas fa-heart"></i>
+                                <div>
+                                    <span class="stat-number" id="favoriteItems">8</span>
+                                    <span class="stat-label">Item Favorit</span>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-item">
+                                <i class="fas fa-star"></i>
+                                <div>
+                                    <span class="stat-number" id="reviewsGiven">5</span>
+                                    <span class="stat-label">Review Diberikan</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Aksi akun -->
+                        <div class="account-actions">
+                            <button class="btn-secondary btn-full" onclick="exportData()">
+                                <i class="fas fa-download"></i> Export Data
+                            </button>
+                            
+                            <button class="btn-danger btn-full" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ShopMart</h3>
+                    <p>Progressive Web App untuk pengalaman belanja online terbaik</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Tautan Cepat</h4>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="products.html">Produk</a></li>
+                        <li><a href="cart.html">Keranjang</a></li>
+                        <li><a href="profile.html">Profil</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontak</h4>
+                    <p><i class="fas fa-envelope"></i> info@shopmart.com</p>
+                    <p><i class="fas fa-phone"></i> +62 123 456 789</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ShopMart PWA. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Status koneksi -->
+    <div class="connection-status" id="connectionStatus">
+        <i class="fas fa-wifi"></i>
+        <span>Online</span>
+    </div>
+
+    <!-- Script JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

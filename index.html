@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopMart - E-Commerce PWA</title>
+    
+    <!-- Meta tags untuk PWA -->
+    <meta name="description" content="Progressive Web App untuk belanja online dengan fitur offline">
+    <meta name="theme-color" content="#4f46e5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="ShopMart">
+    
+    <!-- Link ke manifest dan favicon -->
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" href="/placeholder.svg?height=32&width=32">
+    <link rel="apple-touch-icon" href="/placeholder.svg?height=180&width=180">
+    
+    <!-- Link ke CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header dengan navigasi -->
+    <header class="header">
+        <div class="container">
+            <!-- Logo dan nama aplikasi -->
+            <div class="logo">
+                <i class="fas fa-shopping-bag"></i>
+                <span>ShopMart</span>
+            </div>
+            
+            <!-- Menu navigasi untuk desktop -->
+            <nav class="nav-desktop">
+                <a href="index.html" class="nav-link active">
+                    <i class="fas fa-home"></i> Beranda
+                </a>
+                <a href="products.html" class="nav-link">
+                    <i class="fas fa-box"></i> Produk
+                </a>
+                <a href="cart.html" class="nav-link">
+                    <i class="fas fa-shopping-cart"></i> 
+                    Keranjang <span class="cart-count">0</span>
+                </a>
+                <a href="profile.html" class="nav-link">
+                    <i class="fas fa-user"></i> Profil
+                </a>
+            </nav>
+            
+            <!-- Tombol menu untuk mobile -->
+            <button class="menu-toggle" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Menu mobile (tersembunyi secara default) -->
+    <nav class="nav-mobile" id="mobileMenu">
+        <a href="index.html" class="nav-link active">
+            <i class="fas fa-home"></i> Beranda
+        </a>
+        <a href="products.html" class="nav-link">
+            <i class="fas fa-box"></i> Produk
+        </a>
+        <a href="cart.html" class="nav-link">
+            <i class="fas fa-shopping-cart"></i> 
+            Keranjang <span class="cart-count">0</span>
+        </a>
+        <a href="profile.html" class="nav-link">
+            <i class="fas fa-user"></i> Profil
+        </a>
+    </nav>
+
+    <!-- Konten utama -->
+    <main class="main">
+        <!-- Banner hero section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Selamat Datang di ShopMart</h1>
+                    <p>Belanja online mudah, cepat, dan dapat diakses offline!</p>
+                    <button class="btn-primary" onclick="window.location.href='products.html'">
+                        Mulai Belanja <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="hero-image">
+                    <img src="/placeholder.svg?height=300&width=400" alt="Shopping illustration">
+                </div>
+            </div>
+        </section>
+
+        <!-- Fitur unggulan -->
+        <section class="features">
+            <div class="container">
+                <h2>Mengapa Memilih ShopMart?</h2>
+                <div class="features-grid">
+                    <!-- Fitur 1: Offline Support -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <h3>Akses Offline</h3>
+                        <p>Tetap dapat melihat produk dan keranjang meski tanpa internet</p>
+                    </div>
+                    
+                    <!-- Fitur 2: Responsive Design -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Responsive</h3>
+                        <p>Tampilan optimal di semua perangkat, dari smartphone hingga desktop</p>
+                    </div>
+                    
+                    <!-- Fitur 3: Fast Loading -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Loading Cepat</h3>
+                        <p>Teknologi PWA untuk performa aplikasi yang super cepat</p>
+                    </div>
+                    
+                    <!-- Fitur 4: Easy Install -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <h3>Mudah Diinstall</h3>
+                        <p>Install langsung ke home screen tanpa perlu app store</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Produk populer -->
+        <section class="popular-products">
+            <div class="container">
+                <h2>Produk Populer</h2>
+                <div class="products-grid" id="popularProducts">
+                    <!-- Produk akan dimuat secara dinamis melalui JavaScript -->
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Memuat produk...</p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn-secondary" onclick="window.location.href='products.html'">
+                        Lihat Semua Produk <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ShopMart</h3>
+                    <p>Progressive Web App untuk pengalaman belanja online terbaik</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Tautan Cepat</h4>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="products.html">Produk</a></li>
+                        <li><a href="cart.html">Keranjang</a></li>
+                        <li><a href="profile.html">Profil</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontak</h4>
+                    <p><i class="fas fa-envelope"></i> info@shopmart.com</p>
+                    <p><i class="fas fa-phone"></i> +62 123 456 789</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ShopMart PWA. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Tombol install PWA (akan muncul jika memenuhi syarat) -->
+    <div class="install-prompt" id="installPrompt" style="display: none;">
+        <div class="install-content">
+            <i class="fas fa-download"></i>
+            <span>Install ShopMart ke perangkat Anda</span>
+            <button class="btn-install" id="installBtn">Install</button>
+            <button class="btn-close" onclick="hideInstallPrompt()">×</button>
+        </div>
+    </div>
+
+    <!-- Status koneksi -->
+    <div class="connection-status" id="connectionStatus">
+        <i class="fas fa-wifi"></i>
+        <span>Online</span>
+    </div>
+
+    <!-- Script JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
